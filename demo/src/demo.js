@@ -34,10 +34,6 @@ const handleSlowMovement = (mousePositionChange, axis, step, initialValue) => {
   return 0; 
 }
 
-/*console.log(handleSmallChange(event.dx, state.dx, 10, 0), state.dx);
-console.log(handleSmallChange(event.dx, state.dx, 10, 3), state.dx);  
-console.log(handleSmallChange(event.dx, state.dx, 10, 7), state.dx); */
-
 const draggableOptions = {
   
   onmove: event => {
@@ -48,22 +44,20 @@ const draggableOptions = {
     const step = 10
     
     if (Math.abs(event.dx) < step) {
-      //  console.log("result", handleSlowMovement(event.dx, 'x', 10, x))
       const increment = handleSlowMovement(event.dx, 'x', step, x)
       console.log(increment)
       x += increment;
-      // console.log('x value', x)
     } else {
        x += roundToNearestDigit(event.dx, step)
     }
     
-    /*if (Math.abs(event.dy) < step) {
-      // console.log("result", handleSlowMovement(event.dy, 'y', step, y))
-      y += handleSlowMovement(event.dy, 'y', 10, y)
-      // console.log('y value', y)
+    if (Math.abs(event.dy) < step) {
+      const increment = handleSlowMovement(event.dy, 'y', step, y)
+      console.log(increment)
+      y += increment;
     } else {
-       y += event.dy;
-    }*/
+       y += roundToNearestDigit(event.dy, step)
+    }
   
     target.style.webkitTransform =
     target.style.transform =
