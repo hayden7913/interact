@@ -36,14 +36,30 @@ const handleSlowMovement = (mousePositionChange, axis, step, initialValue) => {
 
 const draggableOptions = {
   
+  snap
+  
   onmove: event => {
     const target = event.target;
     // keep the dragged position in the data-x/data-y attributes
     let x = (parseFloat(target.getAttribute('data-x')) || 0);
     let y = (parseFloat(target.getAttribute('data-y')) || 0);
-    const step = 10
+    const step = 1;
     
-    if (Math.abs(event.dx) < step) {
+    
+    
+    x += drag Math.abs(event.dx) < step ? 
+      handleSlowMovement(event.dx, 'x', step, x) 
+      : 
+      roundToNearestDigit(event.dx, step);
+      
+    y +=  Math.abs(event.dy) < step ? 
+      handleSlowMovement(event.dy, 'y', step, y) 
+      : 
+      roundToNearestDigit(event.dy, step);
+  
+    
+    
+  /*  if (Math.abs(event.dx) < step) {
       const increment = handleSlowMovement(event.dx, 'x', step, x)
       console.log(increment)
       x += increment;
@@ -57,7 +73,7 @@ const draggableOptions = {
       y += increment;
     } else {
        y += roundToNearestDigit(event.dy, step)
-    }
+    }*/
   
     target.style.webkitTransform =
     target.style.transform =
