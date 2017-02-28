@@ -33,8 +33,17 @@ const example = (
   <div>
     <h2>Draggable</h2>
       <Interactive draggable draggableOptions={draggableOptions}>
-        <img src="https://pbs.twimg.com/profile_images/526421493731717120/INda0NaM.png" height={100} width={100}/>
-    </Interactive>
+        <svg>
+          <rect width="200" height="200" fill="blue" />
+        </svg>   
+      </Interactive>
+      
+      <Interactive draggable draggableOptions={draggableOptions}>
+        <svg>
+          <rect width="200" height="200" fill="green
+            " />
+        </svg>   
+      </Interactive>
   </div>
 )
 
