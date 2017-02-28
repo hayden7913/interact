@@ -50,27 +50,20 @@ const draggableOptions = {
     const step = 10
     
     if (Math.abs(event.dx) < step) {
-      console.log("result", handleSlowMovement(event.dx, 'x', 10, x))
+      // console.log("result", handleSlowMovement(event.dx, 'x', 10, x))
       x += handleSlowMovement(event.dx, 'x', 10, x)
-      console.log('x value', x)
-      /*  if (event.dx > 0) {
-          state.dx += event.dx
-          
-          if (state.dx >= step) {
-            x += step;
-            state.dx = 0;
-          }
-        } else if (event.dx < 0) {
-          state.dx += event.dx
-          console.log(event.dx)
-          if (state.dx <= -step) {
-            x -= step;
-            state.dx = 0;
-          }
-        }*/
+      // console.log('x value', x)
     } else {
        x += event.dx;
     }
+    
+    /*if (Math.abs(event.dy) < step) {
+      // console.log("result", handleSlowMovement(event.dy, 'y', 10, y))
+      y += handleSlowMovement(event.dy, 'y', 10, y)
+      // console.log('y value', y)
+    } else {
+       y += event.dy;
+    }*/
   
     target.style.webkitTransform =
     target.style.transform =
