@@ -13,27 +13,25 @@ const state = {
 
 const handleSlowMovement = (mousePositionChange, axis, step, initialValue) => {
   const delta = `d${axis}`;
-  let result = state[dx];
     
   if (mousePositionChange > 0) {
     state[delta] += mousePositionChange;
     
     if (state[delta] >= step) {
-      console.log('hello')
-      result += step;
       state[delta] = 0;
-      console.log('state', state[delta])
+      return step;
     }
   } else {
     state[delta] += mousePositionChange;
 
     if (state[delta] <= -step) {
-      result -= step;
       state[delta] = 0;
+      return -step;
+      
     }
   }
-    
-  return result; 
+
+  return 0; 
 }
 
 /*console.log(handleSmallChange(event.dx, state.dx, 10, 0), state.dx);
@@ -43,22 +41,24 @@ console.log(handleSmallChange(event.dx, state.dx, 10, 7), state.dx); */
 const draggableOptions = {
   
   onmove: event => {
-    const target = event.target
+    const target = event.target;
     // keep the dragged position in the data-x/data-y attributes
     let x = (parseFloat(target.getAttribute('data-x')) || 0);
     let y = (parseFloat(target.getAttribute('data-y')) || 0);
     const step = 10
     
     if (Math.abs(event.dx) < step) {
-      // console.log("result", handleSlowMovement(event.dx, 'x', 10, x))
-      x += handleSlowMovement(event.dx, 'x', 10, x)
+      //  console.log("result", handleSlowMovement(event.dx, 'x', 10, x))
+      const increment = handleSlowMovement(event.dx, 'x', step, x)
+      console.log(increment)
+      x += increment;
       // console.log('x value', x)
     } else {
-       x += event.dx;
+       x += roundToNearestDigit(event.dx, step)
     }
     
     /*if (Math.abs(event.dy) < step) {
-      // console.log("result", handleSlowMovement(event.dy, 'y', 10, y))
+      // console.log("result", handleSlowMovement(event.dy, 'y', step, y))
       y += handleSlowMovement(event.dy, 'y', 10, y)
       // console.log('y value', y)
     } else {
