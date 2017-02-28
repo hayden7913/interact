@@ -6,7 +6,7 @@ import Interactive from '../../src/Interactable'
 const draggableOptions = {
   snap: {
      targets: [
-       interact.createSnapGrid({ x: 30, y: 30 })
+       interact.createSnapGrid({ x: 100, y: 100 })
      ],
      range: Infinity,
      relativePoints: [ { x: 0, y: 0 } ]
