@@ -2,26 +2,27 @@ import React from 'react'
 import { render } from 'react-dom'
 import Interactive from '../../src/Interactable'
 
-function roundToNearest(x, dx) {  
-    const sign = dx / Math.abs(dx);
-    if(dx < 10) return x + 10 * sign;
-    if(dx >= 10) return Math.round(x/10)*10; 
+function roundToNearestDigit(inputValue, digit) {  
+    return Math.round(inputValue / digit) * digit; 
 }
 
 const state = {
-  dx: 0
+  dx: 0,
+  dy: 0
 }
 
 const handleSlowMovement = (mousePositionChange, axis, step, initialValue) => {
   const delta = `d${axis}`;
-  let result = initialValue;
-    console.log(mousePositionChange, delta, step, initialValue)
+  let result = state[dx];
+    
   if (mousePositionChange > 0) {
     state[delta] += mousePositionChange;
     
     if (state[delta] >= step) {
+      console.log('hello')
       result += step;
       state[delta] = 0;
+      console.log('state', state[delta])
     }
   } else {
     state[delta] += mousePositionChange;
@@ -46,13 +47,13 @@ const draggableOptions = {
     // keep the dragged position in the data-x/data-y attributes
     let x = (parseFloat(target.getAttribute('data-x')) || 0);
     let y = (parseFloat(target.getAttribute('data-y')) || 0);
-    const step = 50
+    const step = 10
     
     if (Math.abs(event.dx) < step) {
       console.log("result", handleSlowMovement(event.dx, 'x', 10, x))
-      x += handleSlowMovement(event.dx, state.dx, 10, x)
+      x += handleSlowMovement(event.dx, 'x', 10, x)
       console.log('x value', x)
-        /*if (event.dx > 0) {
+      /*  if (event.dx > 0) {
           state.dx += event.dx
           
           if (state.dx >= step) {
