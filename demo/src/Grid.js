@@ -11,3 +11,11 @@ export default function Grid(props) {
   <rect width="100%" height="1000" fill="url(#cell)" />
 </svg>);
 }
+
+Interactable.propTypes = {
+  children: React.PropTypes.node.isRequired,
+  draggable: React.PropTypes.bool,
+  draggableOptions: React.PropTypes.object,
+  resizable: React.PropTypes.bool,
+  resizableOptions: React.PropTypes.object
+}
