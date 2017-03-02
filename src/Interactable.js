@@ -14,7 +14,7 @@ export default class Interactable extends Component {
 
   render() {
     return cloneElement(this.props.children, { 
-      ref: node => {console.log(node); return this.node = node}, 
+      ref: node => {return this.node = node}, 
       draggable: false
     })
   }
